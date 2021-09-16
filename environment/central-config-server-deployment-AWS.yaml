@@ -27,6 +27,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: central-config-server
+  namespace: preprod
   labels:
     app: central-config-server
 spec:
