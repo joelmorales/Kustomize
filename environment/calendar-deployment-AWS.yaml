@@ -27,6 +27,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: calendar
+  namespace: preprod
   labels:
     app: calendar
 spec:
