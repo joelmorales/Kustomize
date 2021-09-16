@@ -27,6 +27,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: assignmentreportswriteservice
+  namespace: preprod
   labels:
     app: assignmentreportswriteservice
 spec:
