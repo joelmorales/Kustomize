@@ -27,6 +27,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: globers
+  namespace: preprod
   labels:
     app: globers
 spec:
