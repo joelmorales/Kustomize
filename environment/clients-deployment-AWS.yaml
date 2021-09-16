@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: clients
-  namespace: default
+  namespace: preprod
   labels:
     app: clients
 spec:
