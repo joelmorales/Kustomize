@@ -46,6 +46,7 @@ spec:
               subPath: synchronize
       volumes:
       - name: persistent-storage
+        namespace:     default
         persistentVolumeClaim:
           claimName: efs-claim
 
