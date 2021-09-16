@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-server
+  namespace: default
+  labels:
+    app: edge-server
+spec:
+  replicas: 1 #CHANGE
+  minReadySeconds: 60
+  selector:
+    matchLabels:
+      app: edge-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: edge-server
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: edge-server
+          image: 312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/edge-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8765
+              name: liveness-port
+          resources: #CHANGE
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m #400m
+              memory: 1024Mi #256Mi
+          env:
+            - name: env.namespace
+              value: default
+          volumeMounts:
+            - name: persistent-storage
+              mountPath: /opt/globant/gateway/synchronize
+              subPath: synchronize
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: efs-claim
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels: #PODS
+    app: edge-server
+  name: edge-server
+  namespace: default
+spec:
+  selector:
+    app: edge-server
+  ports:
+    - protocol: TCP
+      port: 8765
+      targetPort: 8765
+      name: http
+  type: ClusterIP

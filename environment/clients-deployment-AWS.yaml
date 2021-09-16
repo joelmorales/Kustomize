@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clients
+  namespace: default
+  labels:
+    app: clients
+spec:
+  selector:
+      matchLabels:
+        app: clients
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: clients
+    spec:
+      containers:
+        - name: clients
+          image: 312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/clients:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8614
+          
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: clients
+  labels:
+    app: clients
+spec:
+  selector:
+    app: clients
+  ports:
+    - protocol: TCP
+      port: 8614
+      targetPort: 8614
+      name: http
+  type: ClusterIP

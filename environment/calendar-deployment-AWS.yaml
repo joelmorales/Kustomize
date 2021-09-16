@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calendar
+  namespace: default
+  labels:
+    app: calendar
+spec:
+  selector:
+      matchLabels:
+        app: calendar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: calendar
+    spec:
+      containers:
+        - name: calendar
+          image: 312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/calendar:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8607
+          
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: calendar
+  labels:
+    app: calendar
+spec:
+  selector:
+    app: calendar
+  ports:
+    - protocol: TCP
+      port: 8607
+      targetPort: 8607
+      name: http
+  type: ClusterIP

@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../../../base/assignmentreportswriteservice
+
+namespace: preprod
+
+images:
+- name: glow/assignmentreportswriteservice
+  newName: 312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/assignmentreportswriteservice
+  newTag: latest

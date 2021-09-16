@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assignmentreportswriteservice
+  namespace: default
+  labels:
+    app: assignmentreportswriteservice
+spec:
+  selector:
+      matchLabels:
+        app: assignmentreportswriteservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: assignmentreportswriteservice
+    spec:
+      containers:
+        - name: assignmentreportswriteservice
+          image: 312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/assignmentreportswriteservice:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8667
+          
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: assignmentreportswriteservice
+  labels:
+    app: assignmentreportswriteservice
+spec:
+  selector:
+    app: assignmentreportswriteservice
+  ports:
+    - protocol: TCP
+      port: 8667
+      targetPort: 8667
+      name: http
+  type: ClusterIP

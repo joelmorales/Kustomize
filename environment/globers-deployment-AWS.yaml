@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: globers
+  namespace: default
+  labels:
+    app: globers
+spec:
+  selector:
+      matchLabels:
+        app: globers
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: globers
+    spec:
+      containers:
+        - name: globers
+          image: 312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/globers:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8602
+          
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: globers
+  labels:
+    app: globers
+spec:
+  selector:
+    app: globers
+  ports:
+    - protocol: TCP
+      port: 8602
+      targetPort: 8602
+      name: http
+  type: ClusterIP
