@@ -45,6 +45,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: backendportal
+  namespace: preprod
   labels:
     app: backendportal
   annotations:
