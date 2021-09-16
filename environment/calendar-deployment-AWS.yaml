@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: calendar
-  namespace: default
+  namespace: preprod
   labels:
     app: calendar
 spec:
