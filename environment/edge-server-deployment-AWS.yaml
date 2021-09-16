@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: edge-server
-  namespace: default
+  namespace: preprod
   labels:
     app: edge-server
 spec:
