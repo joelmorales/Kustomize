@@ -8,5 +8,5 @@ namespace: preprod
 
 images:
 - name: glow/calendar
-  newImage:  312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/calendar
+  newName:  312395729448.dkr.ecr.us-east-2.amazonaws.com/dev-repository/calendar
   newTag: latest
