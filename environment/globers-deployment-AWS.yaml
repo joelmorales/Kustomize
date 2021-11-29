@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: globers
-  namespace: default
+  namespace: preprod
   labels:
     app: globers
 spec:
@@ -27,6 +27,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: globers
+  namespace: preprod
   labels:
     app: globers
 spec:

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: assignmentreportswriteservice
-  namespace: default
+  namespace: preprod
   labels:
     app: assignmentreportswriteservice
 spec:
@@ -27,6 +27,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: assignmentreportswriteservice
+  namespace: preprod
   labels:
     app: assignmentreportswriteservice
 spec:

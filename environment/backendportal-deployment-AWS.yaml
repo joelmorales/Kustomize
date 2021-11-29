@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backendportal
-  namespace: default
+  namespace: preprod
   labels:
     app: backendportal
 spec:
@@ -45,6 +45,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: backendportal
+  namespace: preprod
   labels:
     app: backendportal
   annotations:
@@ -56,5 +57,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30037
+      
   type: NodePort
